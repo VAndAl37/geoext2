@@ -223,7 +223,7 @@ Ext.define('GeoExt.data.LayerStore', {
         if(!me._adding) {
             me._adding = true;
             var result  = me.proxy.reader.read(evt.layer);
-            me.add(result.records);
+            me.loadRecords(result.records, {addRecords : true});
             delete me._adding;
         }
     },
@@ -239,10 +239,13 @@ Ext.define('GeoExt.data.LayerStore', {
         // as http://trac.openlayers.org/ticket/2136 is fixed.
         if(this.map.unloadDestroy) {
             if(!this._removing) {
-                var layer = evt.layer;
-                this._removing = true;
-                this.remove(this.getByLayer(layer));
-                delete this._removing;
+                var layer = evt.layer,
+                    record = this.getByLayer(layer);
+                if(record) {
+                    this._removing = true;
+                    this.remove(record);
+                    delete this._removing;
+                }
             }
         } else {
             this.unbind();
