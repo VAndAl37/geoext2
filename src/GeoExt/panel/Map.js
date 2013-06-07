@@ -405,7 +405,7 @@ Ext.define('GeoExt.panel.Map', {
      * @param {Object} state The state to apply.
      */
     applyState: function(state) {
-        var me = this;
+        var me = this,
             map = me.map;
         // if we get strings for state.x, state.y or state.zoom
         // OpenLayers will take care of converting them to the
