@@ -36,17 +36,10 @@ Ext.define('GeoExt.form.field.LayerSwitcher', {
 
             me.on('select', me.onSelect, me);
 
-            // if(map.baseLayer) {
             if(me.rendered) {
                 me.onChangeBaseLayer();
             } else {
-                me.on({
-                    'render': {
-                        fn: me.onChangeBaseLayer,
-                        scope: me,
-                        single: true
-                    }
-                })
+                me.on('render', me.onChangeBaseLayer, me, { single: true });
             }
         }
 
